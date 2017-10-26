@@ -1,0 +1,5 @@
+xfce4-terminal --geometry=200x25 -T $1/PODS -e "watch -n3 -d -t kubectl get pods --show-labels --all-namespaces -o wide --kubeconfig='$HOME/.kube/$1'" \
+ --tab -T $1/Services -e "watch -n3 -d -t kubectl get services --show-labels --all-namespaces -o wide --kubeconfig='$HOME/.kube/$1'" \
+ --tab -T $1/Endpoints -e "watch -n3 -d -t kubectl get endpoints --show-labels --all-namespaces -o wide --kubeconfig='$HOME/.kube/$1'"\
+ --tab -T $1/Namespaces -e "watch -n3 -d -t kubectl get namespaces --show-labels -o wide --kubeconfig='$HOME/.kube/$1'"\
+ --tab -T $1/Ingress -e "watch -n3 -d -t kubectl get ingress --show-labels --all-namespaces -o wide  --kubeconfig='$HOME/.kube/$1'" 
