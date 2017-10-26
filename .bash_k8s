@@ -1,0 +1,5 @@
+__kube_ps1()
+{
+    KCONTEXT=$(kubectl config current-context)
+            echo -e "\e[1;34m[k8s: ${KCONTEXT}]\e[0;33m"
+}

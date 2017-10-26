@@ -1,0 +1,5 @@
+xfce4-terminal --geometry=200x25 -T PODS -e "watch -n3 -d -t kubectl get pods --show-labels --all-namespaces -o wide" \
+ --tab -T Services -e "watch -n3 -d -t kubectl get services --show-labels --all-namespaces -o wide" \
+ --tab -T Endpoints -e "watch -n3 -d -t kubectl get endpoints --show-labels --all-namespaces -o wide"\
+ --tab -T Namespaces -e "watch -n3 -d -t kubectl get namespaces --show-labels -o wide"\
+ --tab -T Ingress -e "watch -n3 -d -t kubectl get ingress --show-labels --all-namespaces -o wide" 
