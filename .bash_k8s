@@ -1,5 +1,24 @@
+#!/bin/bash
+
+alias k='kubectl'
+
+kps1()
+{
+   export KPS1=1
+}
+kps1-off()
+{
+   unset KPS1
+}
+
 __kube_ps1()
 {
-    KCONTEXT=$(kubectl config current-context)
-            echo -e "\e[1;34m[k8s: ${KCONTEXT}]\e[0;33m"
+    if [[ ! -z $KPS1 ]]; then 
+        KCONTEXT=$(kubectl config current-context)
+        if [[ $?=="0" ]]; then
+            CC=$(k config view -ojsonpath='{..current-context}')
+            KNAMESPACE=$(k config view -ojsonpath="{.Contexts[?(@.Name=='$CC')]..namespace}")
+            echo -e "\e[1;34m[k8s: ${KCONTEXT}/${KNAMESPACE}]\e[0;33m"
+        fi
+    fi
 }
