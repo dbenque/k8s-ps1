@@ -14,10 +14,10 @@ kps1-off()
 __kube_ps1()
 {
     if [[ ! -z $KPS1 ]]; then 
-        KCONTEXT=$(kubectl config current-context)
+        KCONTEXT=$(kubectl config current-context 2>/dev/null)
         if [[ $?=="0" ]]; then
-            CC=$(k config view -ojsonpath='{..current-context}')
-            KNAMESPACE=$(k config view -ojsonpath="{.Contexts[?(@.Name==\"$CC\")]..namespace}")
+            CC=$(kubectl config view -ojsonpath='{..current-context}')
+            KNAMESPACE=$(kubectl config view -ojsonpath="{.Contexts[?(@.Name==\"$CC\")]..namespace}")
             echo -e "\e[1;34m[k8s: ${KCONTEXT}/${KNAMESPACE}]\e[0;33m"
         fi
     fi
